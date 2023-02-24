@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Início{% endblock title %}
+
+{% block content %}
+<div class="p-4 max-w-[1170px] mx-auto">
+  <h1 class="text-2xl font-semibold">Products</h1>
+  <div class="grid grid-cols-3 gap-4 mt-6">
+    {% for product in products %}
+      <div data-product="{{ product.id }}">
+        <div class="bg-[#f4f4ff] flex items-center justify-center p-4"> 
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded-t-xl w-[240px] h-[250px]">
+        </div>
+        <div class="flex flex-col">
+          <span class="inline-block mt-2 text-xl">{{ product.name }}</span>
+          <strong class="inline-block mt-2 text-3xl">R$ {{ product.price }}</strong>
+          <a href="{% url 'product:detail' product.id %}" class="flex items-center justify-center mt-4 bg-purple-500 h-[42px] text-white hover:bg-purple-700">Ver mais</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

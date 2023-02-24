@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Carrinho{% endblock title %}
+
+{% block content %}
+<div class="cart p-4 max-w-[1170px] mx-auto">
+  <div class="w-full bg-[#f5f8fa] p-8">
+    <div class="cart-container flex flex-col gap-4">
+      {% for key,value in request.session.cart.items %}
+        <div class="flex gap-4">
+          <img src="{{ value.image }}" alt="{{ value.name }}" class="w-[140px] h-[140px]">
+          <div class="flex flex-col gap-2">
+            <strong class="text-2xl">{{ value.name }}</strong>
+            <span class="text-[#5b5b69] text-md">Valor: R$ {{ value.price }}</span>
+            <span class="text-[#5b5b69] text-md">Quantidade: {{ value.quantity }}</span>
+            <span class="text-[#5b5b69] text-md">Total: R$ {% widthratio value.price 1 value.quantity %}</span>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>  
+  <div class="bg-purple-500 p-4 flex justify-between items-center text-white">
+    <span>Total:</span>
+    <strong id="cart-total" class="text-xl"></strong>
+  </div>
+</div>
+{% endblock content %}

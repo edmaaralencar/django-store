@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Registro{% endblock title %}
+
+{% block content %}
+<div class="w-full min-h-[calc(100vh_-_74px)] flex items-center justify-center">
+  <div class="flex flex-col w-full max-w-[300px]">
+    <h1 class="mb-6 text-2xl text-bold">Faça seu cadastro</h1>
+  
+    <form class="flex flex-col gap-3" method="POST" action=".">
+      {% csrf_token %}
+  
+      {{ form.non_field_errors }}
+  
+      <div class="flex flex-col gap-3">
+        <label for="">Nome de usuário</label>
+        {{ form.username }}
+      </div>
+      <div class="flex flex-col gap-3">
+        <label for="">E-mail</label>
+        {{ form.email }}
+      </div>
+      <div class="flex flex-col gap-3">
+        <label for="">Senha</label>
+        {{ form.password1 }}
+      </div>
+      <div class="flex flex-col gap-3">
+        <label for="">Confirme a senha</label>
+        {{ form.password2 }}
+      </div>
+
+      {% if form.errors or form.non_field_errors %}
+        <div class="p-6 bg-red-100 rounded-xl">
+          {% for field in form %}
+              {{ field.errors }}
+          {% endfor %}
+
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      <button class="mt-4 bg-purple-500 h-[42px] text-white hover:bg-purple-700 text-center">Criar conta</button>
+    </form>
+
+    <a class="mt-4 text-center" href="{% url 'core:signin' %}">Possui uma conta? <strong class="text-purple-500">Faça login</strong> </a>
+  </div>
+</div>
+{% endblock content %}
